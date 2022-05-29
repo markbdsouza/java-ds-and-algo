@@ -14,8 +14,7 @@ import java.util.Stack;
  */
 
 public class Problem20ValidParentheses {
-    class Solution {
-        public boolean isValid(String s) {
+        public static boolean isValid(String s) {
             if(s.length()==1) return false;
             // Use a Stack as we need LIFO - Last In First Out
             Stack<Character> st = new Stack<>();
@@ -54,5 +53,5 @@ public class Problem20ValidParentheses {
                 return true;
             else return false;
         }
-    }
+
 }
