@@ -2,6 +2,7 @@ package com.markbdsouza.datastructures.BinarySearchTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class BinarySearchTree {
 
@@ -156,21 +157,59 @@ public class BinarySearchTree {
     }
 
     public void displayTree() {
-        int layer = 0;
-        if (root == null) return;
-        System.out.println(layer + " " + this.root.key);
-        List<Node> prevList, currentList = new ArrayList<>();
-        while (currentList.size() > 0) {
-            layer++;
-            prevList = currentList;
-            currentList = new ArrayList<>();
-            StringBuilder sb = new StringBuilder();
-            sb.append(layer).append(" ");
-            for (Node prevNode : prevList) {
-//               TODO
+        // Global stack will keep the current row that is being printed. To begin set to root
+        Stack<Node> globalStack = new Stack();
+        globalStack.push(root);
+        // nBlanks will be the number of blanks before and in between. First row.. 16 blanks-number-16 blanks
+        // Each row we iterate through we will halve it. Start with 32. Then 16, 8, 4.. etc.
+        int nBlanks = 32;
+        // If any one has a child, it is not empty.
+        boolean isRowEmpty = false;
+        System.out.println("......................................................");
 
+        while (isRowEmpty == false) {
+            // localStack will keep the variables required for the next row. Once global stack is empty and printed, we will add to local stack. This refreshses each row as we iterate.
+            Stack<Node> localStack = new Stack();
+            isRowEmpty = true;
+            for (int j = 0; j < nBlanks; j++) {
+                System.out.print(" ");
             }
+            // globalstack will have current row details. need to print only if it is not empty
+            while (globalStack.isEmpty() == false) {
+                Node temp = (Node) globalStack.pop();
+                if (temp != null) {
+                    // print current row
+                    System.out.print(temp.key);
+                    // add to localStack for next row
+                    localStack.push(temp.leftChild);
+                    localStack.push(temp.rightChild);
+                    // if any child is not null, we need to print the next row
+                    if (temp.leftChild != null || temp.rightChild != null) {
+                        isRowEmpty = false;
+                    }
+                } else {
+                    // if element is absent, print --
+                    System.out.print("--");
+                    // since current element is abset, push null null as left and right child
+                    localStack.push(null);
+                    localStack.push(null);
+                }
+
+                for (int j = 0; j < nBlanks * 2 - 2; j++) {
+                    // print nblanks*2 since there is empty space on right side of one value and left of next value.
+                    System.out.print(" ");
+                }
+            }
+            // print of entire row is complete.
+            System.out.println();
+            // Each time halve the blank values.
+            nBlanks = nBlanks / 2;
+
+            // now global stack is empty. localstack will have next row elements. push the localstack to global. keep pushing until localstack is empty
+            while (localStack.isEmpty() == false)
+                globalStack.push(localStack.pop());
         }
+        System.out.println("......................................................");
 
     }
 }
