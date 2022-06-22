@@ -1,6 +1,6 @@
 package com.markbdsouza.datastructures.heap;
 
-public class Application {
+public class HeapApplication {
     public static void main(String[] args) {
         Heap heap = new Heap(10);
         heap.insert(40);
@@ -11,7 +11,11 @@ public class Application {
         heap.insert(100);
         heap.insert(30);
         heap.insert(90);
-
+        heap.display();
+        heap.remove();
+        heap.display();
+        heap.insert(60);
+        heap.insert(120);
         heap.display();
     }
 }

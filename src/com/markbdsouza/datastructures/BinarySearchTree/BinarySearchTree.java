@@ -1,7 +1,5 @@
 package com.markbdsouza.datastructures.BinarySearchTree;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class BinarySearchTree {
@@ -160,7 +158,7 @@ public class BinarySearchTree {
         // Global stack will keep the current row that is being printed. To begin set to root
         Stack<Node> globalStack = new Stack();
         globalStack.push(root);
-        // nBlanks will be the number of blanks before and in between. First row.. 16 blanks-number-16 blanks
+        // nBlanks will be the number of blanks before and in between. First row.. 32 blanks-number-32 blanks
         // Each row we iterate through we will halve it. Start with 32. Then 16, 8, 4.. etc.
         int nBlanks = 32;
         // If any one has a child, it is not empty.

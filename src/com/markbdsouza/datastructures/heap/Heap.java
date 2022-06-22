@@ -10,7 +10,7 @@ package com.markbdsouza.datastructures.heap;
 // when deleting, delete the node.. then replace the node with the last node. then keep swapping with parent
 //as long as it is following max heap policy
 
-// Heap can be implmented with linked list or array. In below section we use array
+// Heap can be implemented with linked list or array. In below section we use array to mplement MAX HEAP
 public class Heap {
 
     private Node[] heapArray;
@@ -111,14 +111,52 @@ public class Heap {
             heapArray[index] = heapArray[largerChildIndex];
             index = largerChildIndex;
         }
+        // finally set the new index with the value of the topNoed which we had set at the beginning of this method
         heapArray[index] = topNode;
     }
-
     public void display() {
         System.out.println("Printing the Heap as an Array");
         for (int i = 0; i < currentSize; i++) {
             System.out.print(heapArray[i].getKey() + " ");
         }
-        System.out.println(" ");
+        System.out.println("\n------------------------------------------------------------------------");
+
+        System.out.println("Printing the Heap as a Tree ");
+
+        // nBlanks will be the number of blanks before and in between.
+        // First row.. 32 blanks-number-32 blanks.. Second row- 16 blank-no-16 blank-16 blank-no-16 blank
+        // Each row we iterate through we will halve it. Start with 32. Then 16, 8, 4.. etc.
+        int nBlanks = 32;
+        int totalCurrentCount = 0;
+        int currentRow = 0;
+        // while loop. One iteration of this loop = one row being printed
+        while (totalCurrentCount < currentSize) {
+            // space before first element
+            for (int j = 0; j < nBlanks; j++) {
+                System.out.print(" ");
+            }
+            // Mathematically each row in the tree is from (2^currentRow)-1 TO (2^(currentRow+1))-1
+            // first row is 0->1. Second row 1->3. Third Row 3->7. etc. Using this logic for the loop
+            int currentIndex = (int) (Math.pow(2, currentRow) - 1);
+            // loop through current row elements and make sure we arent run out of all elements as well
+            while (currentIndex < (int) (Math.pow(2, currentRow + 1) - 1)
+                    && totalCurrentCount < currentSize) {
+                // Print the current element
+                System.out.print(heapArray[currentIndex].getKey());
+                // print space between 2 elements
+                for (int j = 0; j < nBlanks * 2 - 2; j++) {
+                    // print nblanks*2 since there is empty space on right side of one value and left of next value.
+                    System.out.print(" ");
+                }
+                totalCurrentCount++;
+                currentIndex++;
+            }
+            // printing one row is over. Increment row counter
+            currentRow++;
+            // next row should have half the blanks between numbers
+            nBlanks = nBlanks / 2;
+            System.out.println();
+        }
+        System.out.println("------------------------------------------------------------------------");
     }
 }
