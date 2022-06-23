@@ -17,5 +17,7 @@ public class HeapApplication {
         heap.insert(60);
         heap.insert(120);
         heap.display();
+
+        heap.displayHeap();
     }
 }
