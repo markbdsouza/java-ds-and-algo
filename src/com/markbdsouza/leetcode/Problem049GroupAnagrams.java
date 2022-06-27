@@ -9,7 +9,7 @@ import java.util.*;
  * <p>
  * Given an array of strings strs, group the anagrams together. You can return the answer in any order.
  */
-public class Problem49GroupAnagrams {
+public class Problem049GroupAnagrams {
 
     public static List<List<String>> groupAnagrams(String[] strs) {
 

@@ -3,8 +3,8 @@ package com.markbdsouza.leetcode;
 import java.util.Stack;
 
 /**
- * URL: https://leetcode.com/problems/valid-parentheses/
- * Level: EASY
+ * URL: https://leetcode.com/problems/top-k-frequent-elements/
+ * Level: MEDIUM
  * Tags: String, Stack
  *
  * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -13,7 +13,7 @@ import java.util.Stack;
  * Open brackets must be closed in the correct order.
  */
 
-public class Problem20ValidParentheses {
+public class Problem347TopKFrequentElements {
         public static boolean isValid(String s) {
             if(s.length()==1) return false;
             // Use a Stack as we need LIFO - Last In First Out
